@@ -50,7 +50,7 @@ app.post('/tasks', async (req: Request, res: Response) => {
     const { title, description, status, priority, deadline, assignedTo } = req.body;
 
     if (!title || !description || !status || !priority || !deadline || !assignedTo) {
-      return res.status(400).json({ message: 'all fields are required' });
+      return res.status(400).json({ message: 'All fields are required' });
     }
 
     const taskData: ITask = { title, description, status, priority, deadline, assignedTo } as ITask;
