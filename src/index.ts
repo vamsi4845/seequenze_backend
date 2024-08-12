@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { Request, Response } from 'express';
-import { connectToDatabase } from '../database';
+import { connectToDatabase } from './database';
 import {
   getAllTasks,
   getTaskById,
@@ -9,8 +9,7 @@ import {
   updateTask,
   deleteTask,
 } from './tasks';
-import { ITask } from '../models/taskModel';
-
+import { ITask } from './models/TaskModel';
 const app = express();
 app.use(cors());
 app.use(express.json());

@@ -1,5 +1,5 @@
-import { ITask } from '../models/taskModel'; 
-import { Task } from '../models/taskModel';
+import { ITask, Task } from "./models/TaskModel";
+
 export async function getAllTasks() {
   return await Task.find();
 }
