@@ -4,7 +4,8 @@
   "description": "Task management backend with Express, TypeScript, and MongoDB",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
     "build": "tsc",
     "serve": "node dist/index.js"
   },
@@ -21,5 +22,8 @@
     "@types/node": "^20.4.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
