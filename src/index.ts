@@ -8,6 +8,7 @@ import {
   createTask,
   updateTask,
   deleteTask,
+  isTaskTimedOut,
 } from './tasks';
 import { ITask } from './models/TaskModel';
 const app = express();
@@ -80,6 +81,23 @@ app.put('/tasks/:id', async (req: Request, res: Response) => {
   }
 });
 
+// GET /tasks/:id/timeout: Check if a task has timed out
+app.get('/tasks/:id/timeout', async (req: Request, res: Response) => {
+  try {
+    const taskId = req.params.id;
+    const task = await getTaskById(taskId);
+
+    if (task) {
+      const timedOut = isTaskTimedOut(task);
+      res.json({ timedOut });
+    } else {
+      res.status(404).json({ message: 'Task not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error checking task timeout', error });
+  }
+});
+
 // DELETE /tasks/:id: Delete a task by ID
 app.delete('/tasks/:id', async (req: Request, res: Response) => {
   try {
@@ -99,6 +117,8 @@ app.delete('/tasks/:id', async (req: Request, res: Response) => {
     });
   }
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

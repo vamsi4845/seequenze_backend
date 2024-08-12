@@ -1,3 +1,4 @@
+import exp from "constants";
 import { ITask, Task } from "./models/TaskModel";
 
 export async function getAllTasks() {
@@ -19,4 +20,12 @@ export async function updateTask(id: string, updatedData: Partial<ITask>) {
 
 export async function deleteTask(id: string) {
   return await Task.findByIdAndDelete(id);
+}
+
+export function isTaskTimedOut(task: ITask) {
+  const currentDate = new Date();
+  const taskDeadline = new Date(task.deadline);
+  const timeDifference = taskDeadline.getTime() - currentDate.getTime();
+  const timeDifferenceInMinutes = Math.round(timeDifference / (1000 * 60));
+  return timeDifferenceInMinutes;
 }
